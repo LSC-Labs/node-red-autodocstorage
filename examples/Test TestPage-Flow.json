@@ -1,0 +1,1119 @@
+[
+    {
+        "id": "29090ac3c4d061b2",
+        "type": "tab",
+        "label": "Test Page",
+        "disabled": false,
+        "info": "",
+        "env": [
+            {
+                "name": "SourceFileName",
+                "value": "/autodoc/_dropqueue/test_1997-10-01-Invoice.pdf",
+                "type": "str"
+            },
+            {
+                "name": "TestPictureName",
+                "value": "/autodoc/_dropqueue/pic1.jpg",
+                "type": "str"
+            },
+            {
+                "name": "TestPictureNames",
+                "value": "/autodoc/_dropqueue/pic1.jpg; /autodoc/_dropqueue/pic2.jpg",
+                "type": "str"
+            }
+        ]
+    },
+    {
+        "id": "7c22851cfccbe0a0",
+        "type": "group",
+        "z": "29090ac3c4d061b2",
+        "name": "Lock / Unlock Functions",
+        "style": {
+            "fill": "#d1d1d1",
+            "fill-opacity": "0.5",
+            "label": true,
+            "color": "#777777"
+        },
+        "nodes": [
+            "cd62cd9ba895a3e4",
+            "173297fc9dc1e584",
+            "e044bc09ee9c10f8",
+            "47851569aebdc39c",
+            "4abe5eba88022772",
+            "d4c68026e918a7af",
+            "ceb6205735cfc584",
+            "860ef9ec2af6c2c1",
+            "a60cce5b8a53eb2d",
+            "c36f34849e1829e8",
+            "457165887ec117d6",
+            "efb5a33da84b531d",
+            "9fc13ae539e48b82",
+            "8e930659349ec9eb",
+            "174d4c7dee626113",
+            "158a73c104a9cf68",
+            "6f686e87029ea0f3",
+            "acb1b6f6c83cec39",
+            "169314ce1ce02dc9",
+            "02e82bf6f15bf823",
+            "a47ee394c02e9c86",
+            "45b866257db018e7",
+            "6494d7b7dfb2f0c9",
+            "738a9bef4fa52126",
+            "2e64a18d50aa3b80"
+        ],
+        "x": 54,
+        "y": 79,
+        "w": 952,
+        "h": 762
+    },
+    {
+        "id": "60b61e1e312660ae",
+        "type": "group",
+        "z": "29090ac3c4d061b2",
+        "name": "Set Property Functions",
+        "style": {
+            "fill": "#d1d1d1",
+            "label": true,
+            "color": "#777777",
+            "fill-opacity": "0.5"
+        },
+        "nodes": [
+            "b600257d804067ac",
+            "387d30c190c0844f",
+            "bbf785e37ef583cb",
+            "c6a6a4b31d045d38",
+            "b40c04b62f629e24",
+            "72d364c14a17d082",
+            "97f037027c562d7d",
+            "8ec33795f7cbc220",
+            "aa5d28a7642cde19",
+            "0c50daa58bc8367d",
+            "da71eac92ee5ff0c"
+        ],
+        "x": 54,
+        "y": 879,
+        "w": 952,
+        "h": 242
+    },
+    {
+        "id": "952b79dffbe78067",
+        "type": "group",
+        "z": "29090ac3c4d061b2",
+        "name": "Stirling OCR/PDF Functions",
+        "style": {
+            "fill": "#d1d1d1",
+            "label": true,
+            "color": "#777777",
+            "fill-opacity": "0.5"
+        },
+        "nodes": [
+            "c79a2c4fb919cd62",
+            "e586790c4d09d525",
+            "537651b4557dba00",
+            "18010928a7ee6156",
+            "e2216b6432c81b3a",
+            "010212f087bca390"
+        ],
+        "x": 54,
+        "y": 1139,
+        "w": 972,
+        "h": 162
+    },
+    {
+        "id": "cd62cd9ba895a3e4",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Inject source file (event update)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SourceFileName",
+        "payloadType": "flow",
+        "x": 230,
+        "y": 680,
+        "wires": [
+            [
+                "173297fc9dc1e584"
+            ]
+        ]
+    },
+    {
+        "id": "173297fc9dc1e584",
+        "type": "lock file",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Lock the file (PDF)",
+        "lockMode": "setLock",
+        "changeEvent": "update",
+        "removeWhenUnlocked": false,
+        "FilterMasks": "pdf",
+        "x": 550,
+        "y": 720,
+        "wires": [
+            [
+                "e044bc09ee9c10f8",
+                "c36f34849e1829e8"
+            ],
+            [
+                "47851569aebdc39c"
+            ],
+            [
+                "4abe5eba88022772"
+            ],
+            [
+                "d4c68026e918a7af"
+            ]
+        ]
+    },
+    {
+        "id": "e044bc09ee9c10f8",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "File locked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "47851569aebdc39c",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "File unlocked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "4abe5eba88022772",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "No lock possible",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "d4c68026e918a7af",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Not in scope",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "ceb6205735cfc584",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Inject source file (event remove)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "remove",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SourceFileName",
+        "payloadType": "flow",
+        "x": 230,
+        "y": 720,
+        "wires": [
+            [
+                "173297fc9dc1e584"
+            ]
+        ]
+    },
+    {
+        "id": "860ef9ec2af6c2c1",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Inject test.pdf.lock (event update)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "/autodoc/_dropqueue/test.pdf.lock",
+        "payloadType": "str",
+        "x": 230,
+        "y": 760,
+        "wires": [
+            [
+                "173297fc9dc1e584"
+            ]
+        ]
+    },
+    {
+        "id": "a60cce5b8a53eb2d",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Inject test.txt (event update)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "/autodoc/_dropqueue/test.txt",
+        "payloadType": "str",
+        "x": 220,
+        "y": 800,
+        "wires": [
+            [
+                "173297fc9dc1e584"
+            ]
+        ]
+    },
+    {
+        "id": "c36f34849e1829e8",
+        "type": "lock file",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Increment lock",
+        "lockMode": "incrementLock",
+        "changeEvent": "update",
+        "removeWhenUnlocked": false,
+        "FilterMasks": "pdf",
+        "x": 540,
+        "y": 540,
+        "wires": [
+            [
+                "457165887ec117d6",
+                "174d4c7dee626113"
+            ],
+            [
+                "efb5a33da84b531d"
+            ],
+            [
+                "9fc13ae539e48b82"
+            ],
+            [
+                "8e930659349ec9eb"
+            ]
+        ]
+    },
+    {
+        "id": "457165887ec117d6",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "increment locked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "efb5a33da84b531d",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "increment File unlocked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "9fc13ae539e48b82",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "increment No lock possible",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "8e930659349ec9eb",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "increment Not in scope",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "174d4c7dee626113",
+        "type": "lock file",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Decrement lock",
+        "lockMode": "removeLock",
+        "changeEvent": "update",
+        "removeWhenUnlocked": false,
+        "FilterMasks": "pdf",
+        "x": 540,
+        "y": 360,
+        "wires": [
+            [
+                "158a73c104a9cf68",
+                "02e82bf6f15bf823"
+            ],
+            [
+                "6f686e87029ea0f3"
+            ],
+            [
+                "acb1b6f6c83cec39"
+            ],
+            [
+                "169314ce1ce02dc9"
+            ]
+        ]
+    },
+    {
+        "id": "158a73c104a9cf68",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "decrement File locked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "6f686e87029ea0f3",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "decrement File unlocked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "acb1b6f6c83cec39",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "decrement No lock possible",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "169314ce1ce02dc9",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "decrement Not in scope",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "02e82bf6f15bf823",
+        "type": "lock file",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "remove lock force",
+        "lockMode": "removeLockForce",
+        "changeEvent": "update",
+        "removeWhenUnlocked": false,
+        "FilterMasks": "pdf",
+        "x": 550,
+        "y": 180,
+        "wires": [
+            [
+                "a47ee394c02e9c86"
+            ],
+            [
+                "45b866257db018e7"
+            ],
+            [
+                "6494d7b7dfb2f0c9"
+            ],
+            [
+                "738a9bef4fa52126"
+            ]
+        ]
+    },
+    {
+        "id": "a47ee394c02e9c86",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "remove File locked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "45b866257db018e7",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "remove File unlocked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "6494d7b7dfb2f0c9",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "remove No lock possible",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "738a9bef4fa52126",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "remove Not in scope",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2e64a18d50aa3b80",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "7c22851cfccbe0a0",
+        "name": "Inject source file (event update)",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SourceFileName",
+        "payloadType": "flow",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "02e82bf6f15bf823"
+            ]
+        ]
+    },
+    {
+        "id": "b600257d804067ac",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Inject testfile name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SourceFileName",
+        "payloadType": "env",
+        "x": 190,
+        "y": 920,
+        "wires": [
+            [
+                "387d30c190c0844f"
+            ]
+        ]
+    },
+    {
+        "id": "387d30c190c0844f",
+        "type": "set props",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "",
+        "textProperties": [
+            {
+                "name": "SampleProp",
+                "value": "Value1"
+            },
+            {
+                "name": "TestResolve",
+                "value": "$(SampleProp)"
+            },
+            {
+                "name": "ConditionalResolve",
+                "value": "$(SS??Not resolved) or $(SS?W1:W2)"
+            }
+        ],
+        "x": 480,
+        "y": 920,
+        "wires": [
+            [
+                "bbf785e37ef583cb"
+            ]
+        ]
+    },
+    {
+        "id": "bbf785e37ef583cb",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Set properties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "11ece77f22367c2f",
+        "type": "comment",
+        "z": "29090ac3c4d061b2",
+        "name": "Prepare First !",
+        "info": "It is mandatory to set the name of the sourcefile first,\nas it is be used by the most incect nodes in this flow.\nAlso, if you want to test the picture to pdf functions,\nyou have to set the names before.\n\n**_SourceFileName_** var should be set in the flow with a full qualified name,\nand best with a ISO Timestamp inside, so the search property is able to find\nAlso the file should exist if you want to test the OCR/Stirling functions\n\nDefault for the var SourceFileName is \"`/autodoc/_dropqueue/test_1997-10-01-Invoice.pdf`\"\n\n**_TestPictureName_** var should be set to a valid picture.\n\nDefault for the var TestPictureName is \"`/autodoc/_dropqueue/pic1.jpg`\"\n\n**_TestPictureNames_** var should be set to a valid pictures,\ndelimited by a ',' or a ';'.\nAdditional blanks are allowed, cause the filename will be trimmed().\n\nDefault for the var TestPictureName is \"`/autodoc/_dropqueue/pic1.jpg;/autodoc/_dropqueue/pic2.jpg`\"\n",
+        "x": 130,
+        "y": 40,
+        "wires": [],
+        "icon": "node-red/alert.svg"
+    },
+    {
+        "id": "c6a6a4b31d045d38",
+        "type": "search props",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "",
+        "searchMode": "AtLeastOne",
+        "source": "FileName",
+        "searchMasks": [
+            {
+                "searchMask": "(?<mode>[Tt]est)"
+            },
+            {
+                "searchMask": "(?<type>Invoice|Rechnung)"
+            }
+        ],
+        "textProperties": [
+            {
+                "name": "Test",
+                "value": "Found the type : $(Type)"
+            },
+            {
+                "name": "Mode",
+                "value": "Found the mode : $(Mode?$(Mode):nothing for $(Type))"
+            }
+        ],
+        "TraceMode": true,
+        "x": 490,
+        "y": 980,
+        "wires": [
+            [
+                "72d364c14a17d082"
+            ],
+            [
+                "97f037027c562d7d"
+            ]
+        ]
+    },
+    {
+        "id": "b40c04b62f629e24",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Inect testfile name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "SourceFileName",
+        "payloadType": "env",
+        "x": 190,
+        "y": 980,
+        "wires": [
+            [
+                "c6a6a4b31d045d38"
+            ]
+        ]
+    },
+    {
+        "id": "72d364c14a17d082",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Search props - Match",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "97f037027c562d7d",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Search props - No match",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "8ec33795f7cbc220",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Inect stupid name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "stupid name",
+        "payloadType": "str",
+        "x": 190,
+        "y": 1020,
+        "wires": [
+            [
+                "c6a6a4b31d045d38"
+            ]
+        ]
+    },
+    {
+        "id": "aa5d28a7642cde19",
+        "type": "auto props",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "",
+        "setFileInfos": true,
+        "autoDetectLanguage": true,
+        "x": 520,
+        "y": 1080,
+        "wires": [
+            [
+                "da71eac92ee5ff0c"
+            ]
+        ]
+    },
+    {
+        "id": "0c50daa58bc8367d",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Inject textContent ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            },
+            {
+                "p": "textContent",
+                "v": "Das ist die Rechnung 1735667 für Jo Waschl, vom 17.04.2023 von Amazon Ltd.",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "FullStorageLogFileName",
+        "payloadType": "env",
+        "x": 180,
+        "y": 1080,
+        "wires": [
+            [
+                "aa5d28a7642cde19"
+            ]
+        ]
+    },
+    {
+        "id": "da71eac92ee5ff0c",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "60b61e1e312660ae",
+        "name": "Auto properties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "c79a2c4fb919cd62",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "Inject picture name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "TestPictureName",
+        "payloadType": "env",
+        "x": 190,
+        "y": 1200,
+        "wires": [
+            [
+                "e586790c4d09d525"
+            ]
+        ]
+    },
+    {
+        "id": "e586790c4d09d525",
+        "type": "pic to pdf",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "",
+        "StirlingService": "eb67c1582350cb37",
+        "fitMode": "fillPage",
+        "autoRotate": true,
+        "colorOption": "color",
+        "existOption": "rename",
+        "TraceMode": true,
+        "x": 500,
+        "y": 1200,
+        "wires": [
+            [
+                "537651b4557dba00"
+            ],
+            [
+                "18010928a7ee6156"
+            ],
+            [
+                "e2216b6432c81b3a"
+            ]
+        ]
+    },
+    {
+        "id": "537651b4557dba00",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "PDF created",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "18010928a7ee6156",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "Original message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "e2216b6432c81b3a",
+        "type": "debug",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "Error occured",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "010212f087bca390",
+        "type": "inject",
+        "z": "29090ac3c4d061b2",
+        "g": "952b79dffbe78067",
+        "name": "Inject pictures name",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "event",
+                "v": "update",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "TestPictureNames",
+        "payloadType": "env",
+        "x": 190,
+        "y": 1240,
+        "wires": [
+            [
+                "e586790c4d09d525"
+            ]
+        ]
+    },
+    {
+        "id": "eb67c1582350cb37",
+        "type": "stirling-service",
+        "Name": "NAS Stirling Service",
+        "Address": "http://papa-nas:9080",
+        "TraceMode": true
+    }
+]

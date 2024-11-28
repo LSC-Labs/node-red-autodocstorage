@@ -1,0 +1,95 @@
+<script type="text/html" data-template-name="store file">
+  
+    <div class="form-row">
+        <label for="node-input-StorageLocation"><i class="fa fa-globe"></i> <span data-i18n="storeAsFile.StorageService.label"></label>
+        <input id="node-input-StorageLocation" type="text"/>
+    </div>
+    
+    <!-- Define the Options if a file exists -->
+    <div class="form-row" id="node-block-container-Target Options">
+        <label for="node-input-targetOption"><i class="fa fa-exclamation-triangle"></i> <span data-i18n="storeAsFile.Target.label"></span></label>
+        <select id="node-input-targetOption" style="width:70%">
+            <optgroup data-i18n="[label]storeAsFile.Target.selectOptions">
+                <option value="override"    data-i18n="storeAsFile.Target.option.override" ></option>
+                <option value="noaction"    data-i18n="storeAsFile.Target.option.noaction" ></option>
+                <option value="rename"      data-i18n="storeAsFile.Target.option.rename" ></option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">  
+        <label for="node-input-writeLog" style="width:20%;"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]storeAsFile.WriteLog.label"></span></label>
+        <input  id="node-input-writeLog" type="checkbox" style="margin-left:10px; vertical-align:top; width:auto;"/>
+        <label style="width:auto;"> <span data-i18n="[html]storeAsFile.WriteLog.text"></span></label>
+    </div>
+
+    <div class="form-row">  
+        <label for="node-input-writeCopyLog" style="width:20%;"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]storeAsFile.WriteCopyLog.label"></span></label>
+        <input  id="node-input-writeCopyLog" type="checkbox" style="margin-left:10px; vertical-align:top; width:auto;"/>
+        <label style="width:auto;"> <span data-i18n="[html]storeAsFile.WriteCopyLog.text"></span></label>
+    </div>    
+    <!-- Define the path for the document -->
+    <div class="form-row" id="node-block-container-FilePath">
+        <label for="node-input-filePath"><i class="fa fa-hdd-o"></i> <span data-i18n="storeAsFile.FilePath.label"></span></label>
+        <input  id="node-input-filePath" type="text"  placeholder="\temp\$(user-name)\$(company)" >
+    </div>
+    <!-- Define the filename for the document -->
+    <div class="form-row" id="node-block-container-FileName">
+        <label for="node-input-fileMask"><i class="fa fa-file-o"></i> <span data-i18n="storeAsFile.FileMask.label"></span></label>
+        <input  id="node-input-fileMask" type="text"  placeholder="$(filename).pdf">
+    </div>
+    
+    <!-- Name of this node-->
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="storeAsFile.Name.label"></span></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+
+    <div class="form-tips" id="node-tip-fileMask">
+        <span data-i18n="[html]storeAsFile.Tip"></span>
+    </div>
+</script>
+
+
+<script type="text/javascript">
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('store file',{
+        category: 'Auto Doc',
+        color: '#FDF0C2',
+        icon: "font-awesome/fa-hdd-o",
+        label: function() { return this.name || "store file";  },
+
+        defaults: {
+            // Name of this config node
+            name:           { value: "" },
+
+            fileMask:       { value: "", required : true },
+
+            filePath:       { value: "" },
+
+            targetOption:   { value: "rename" },
+
+            writeLog:       { value: false },
+
+            writeCopyLog:   { value: false },
+
+
+            // Need the storage handler infos
+            StorageLocation:  {
+                type:"storage-location", 
+                required: true, 
+            }
+        },
+
+        inputs: 1,
+        inputLabels: [ "document file" ],
+
+        outputs: 2,
+        outputLabels: [ "file stored", "store error" ],
+
+});
+
+
+</script>
+

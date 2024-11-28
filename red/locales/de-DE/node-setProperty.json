@@ -1,0 +1,27 @@
+{
+    "setproperty": {
+        "label": {
+            "use-regex": "Regex Matcher.",
+            "Property-Value": "Wert"
+        },
+        "tip": {
+            "property-name": "<b>Tipp:</b> Der Property Name muss kleingeschrieben und ohne Leerzeichen sein.",
+
+            "regex-usage": [
+                    "<p>",
+                    "Der Regex Matcher ist <b>eingeschaltet</b> - Die Zeilen werden als Regular Expression genutzt.",
+                    " Der erste Treffer im Dokument wird verwendet und den 'Wert' zu setzten.",
+                    " Die Definition im Wert kann die Regular Expression Gruppen Definition $<n> nutzen um das Ergebnis zu bilden.",
+                    "</p><p>",
+                    "Wenn eine Regular Expression angewandt werden konnte, wird das Ergebnis als Nachricht über den Ausgang <b>'match'</b> geschickt.,",
+                    " andernfalls, wird die Nachricht über den <b>'match'</b> Ausgang zur weiteren Verarbeitung weitergeleitet."
+            ],
+
+            "value-usage": [
+                "<p>Der Regex Matcher ist <b>ausgeschaltet</b>.",
+                "Der Wert wird wie definiert gesetzt.</p>",
+                "<p><b>Tipp:</b> Um gegen das Dokument zu prüfen, sollte der Regex Matcher eingeschaltet sein.</p>"
+            ]
+        }
+    }
+}

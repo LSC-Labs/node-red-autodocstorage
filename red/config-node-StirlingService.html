@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    /* Register the set fix data node function */
+    RED.nodes.registerType('stirling-service',{
+        category: 'config',
+        defaults: {
+            // Name of this config node
+            Name:  { value: ""},
+            // Address of service as http://... or https://
+            Address: { 
+                        value: "localhost" ,
+                        required: true , 
+                        validate:RED.validators.regex(/^(http:|https:)\/\/[\.\-_a-zA-Z0-9]+(:\d+)?$/)
+                    },
+            // Trace mode on/off for this service
+            TraceMode: { value: false }
+        },
+        label: function() {
+            return this.Address + ( this.Name ? " - (" + this.Name + ")" : "") || "Stirling Service";
+        },
+    });
+
+
+</script>
+
+<script type="text/html" data-template-name="stirling-service">
+
+    <div class="form-row">
+        <label for="node-config-input-Address"><i class="fa fa-globe"></i> <span data-i18n="StirlingService.Address.label"></span></label>
+        <input type="text" id="node-config-input-Address" placeholder="http://....">
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-TraceMode" style="width:20%"><i class="fa fa-bolt"></i> <span data-i18n="StirlingService.TraceMode.label"></span></label>
+        <input type="checkbox" id="node-config-input-TraceMode" style="margin-left:10px; vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="StirlingService.TraceMode.text"></span></label>
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-Name"><i class="fa fa-tag"></i> <span data-i18n="StirlingService.Name.label"></span></label>
+        <input type="text" id="node-config-input-Name" placeholder="Stirling">
+    </div>
+
+    <div class="form-tips" id="node-tip-Address">
+        <span data-i18n="[html]StirlingService.Tip"></span>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="stirling-service">
+    <p>Stirling Service Configuration</p>
+    The address and the port of the Stirling Service is needed.<br/>
+    To install, you can find the Stirling PDF Service here : <a href="https://github.com/Stirling-Tools/Stirling-PDF">https://github.com/Stirling-Tools/Stirling-PDF</a>
+    , or use a docker installation as described here: <a hreef="https://stirlingtools.com/docs/Getting%20started/Installation/Docker/Docker%20Install/">https://stirlingtools.com/docs/Getting%20started/Installation/Docker/Docker%20Install/</a><div class=""></div>
+</script>

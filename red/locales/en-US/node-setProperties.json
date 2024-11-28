@@ -1,0 +1,7 @@
+{
+    "setProperties": {
+        "Name" : {
+            "label": "Node Name"
+        }
+    }
+}

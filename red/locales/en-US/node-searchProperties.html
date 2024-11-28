@@ -1,0 +1,95 @@
+
+<script type="text/html" data-help-name="search props">
+    <p>Search with regular expressions for properties to set.</p>
+    Source for the search can be the text content, the file name or the result of the last search.
+    <br/>
+    The module supports the standard group definition of regular expression and the group naming 
+    extension "(?&lt;groupname&gt;regex)". Groups are used to define the property content dependen on the text content.<br/>
+    <code>Tip</code> As properties will substituted, you can expand or redefine already definde properties.
+    For example <code>Topic = "$(Topic)-secret"</code>. In addition, it is possible to use a simple if then else logic in defining the value ( see Examples below)
+        
+    <h3>Options</h3>
+    <h4>Operation</h4>
+    Specifies search input and mode.
+    If successful, the properties will be set and the last match result will be appended to the msg object.
+    <h5>Input</h5>
+    <ul>
+        <li><code>document text</code><br/>
+            Uses the complete document text as input to search for.
+        </li>
+        <li><code>last match result</code><br/>
+            Uses the last match of the previous "search props" node to narrow the search results.
+        </li>
+        <li><code>source file name</code><br/>
+            Uses the source file name (msg.payload) as search text.
+        </li>
+    </ul>
+    <h5>Mode</h5>
+    <ul>
+        <li><code>all matches</code><br/>
+            All search masks will be processed, and if all of them matches, the properties will be set.
+        </li>
+        <li><code>first match</code><br/>
+            When the first match of a search comes in place, the processing stops.
+        </li>
+        <li><code>at least one match</code><br/>
+            All search masks will be processed, at least one must match.
+        </li>
+        <li><code>if no match</code><br/>
+            If no search mask is matching, the property area will be processed and the message will be sent on port 2. 
+            If a match comes in place, the property area will <b>NOT</b> be processed,
+            and the message will be sent on port 1.
+        </li>
+        <li><code>in any case</code><br/>
+            Match or not, the property area will be processed. Depending on a match or not,
+            the message will be sent on port 1 or 2.
+        </li>
+    </ul>
+    All matches will become part of the "last match result" and stored in the message property "lastMatchContent".
+    <h4>First group</h4>
+    When using the same group name in the search masks, the last matching group name will win.<br/>
+    By checking this flag, the first match will stay in place and will NOT be replaced by further matches.
+    <h3>Examples</h3>
+    <h4>Search masks</h4>
+    <dl>
+        <dt>(Jo).(?&lt;LastName&gt;Waschl)</dt>
+        <dd>Is searching for the name "Jo Waschl". The groups will be set:
+            <ul><code>$(0) = "Jo Waschl" - the found text.</code></ul>
+            <ul><code>$(1) = "Jo" - the first group.</code></ul>
+            <ul><code>$(2) = "Waschl" - the second group.</code></ul>
+            <ul><code>$(LastName) = "Waschl" - as the group was named, it's available also under the name.</code></ul>
+        </dd>
+    </dl>
+    <h4>Properties</h4>
+    <dl>
+        <dt>LastName = $(lastname)</dt>
+        <dd>Works, cause property names ar NOT case sensitive. Sets the property "LastName" to the found value - in this example "Waschl"</dd>
+        <dt>lastname = $(2)</dt>
+        <dd>Will set the property to the content of group 2. The result is the same as in the example as above.</dd>
+        <dt>LastName = $(unknownVar??$(lastname))</dt>
+        <dd>Will set the property to content of group "lastName" if unknownVar is empty, otherwis the var content of unknownVar.</dd>
+        <dt>LastName = $(unknownVar?$(lastname):$(firstname))</dt>
+        <dd>Will set the property to content of group "lastName" if unknownVar is empty, otherwis to the content of group "firstName".</dd>
+    </dl>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>The path to the document in a way, that it can be addressed and found.</dd>
+        <dt>textContent<span class="property-type">string</span></dt>
+        <dd>The content of the document as text.</dd>
+        <dt>lastMatch<span class="property-type">string</span></dt>
+        <dd>The result of the last match.</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li ><code>match</code><br/>   
+            The result of the searches has a match.
+        </li>
+        <li>
+            <code>no match</code><br/>   
+            No match comes in place. Espessially the modes "if no match" and "in any case" will send on this port.
+        </li>
+    </ol>
+</script>

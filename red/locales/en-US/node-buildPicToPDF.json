@@ -1,0 +1,42 @@
+{
+    "buildPicToPDF": {
+        "autoRotate": {
+            "label": "Correct",
+            "text": "Auto rotate image"
+        },
+        "fitMode": {
+            "label" : "Image fit",
+            "title" : "Choose Image Fit Option",
+            "fillPage"           : "Fill Page",
+            "fitPageToImage"     : "Fit Page to Image",
+            "maintainAspectRatio": "Maintain Aspect Ratios"
+        },
+        "colorOption": {
+            "label" : "Color",
+            "title" : "Choose Color Handling",
+            "color"         : "Color",
+            "greyscale"     : "Greyscale",
+            "blackwhite"    : "Black / White"
+        },
+        "existOption": {
+            "label" : "Target",
+            "title" : "Choose mode,if target document exists",
+            "override"   : "Override existing file",
+            "rename"     : "Make a unique name",
+            "noaction"   : "No action - stop"
+        },
+        
+        "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
+        
+        "tip": {
+            "minLength": [
+                          "<b>Tip:</b> Minimum number of characters to be valid.<br/>",
+                          "If less then this number of characters are in the result, the document is defined as it has no content."
+                        ]
+
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "readPDFText": {
+        "Name" : {
+            "label": "Node Name"
+        },
+        "Service": {
+            "label": "Stirling Svc"
+        },
+        "MinLen": {
+            "label": "Min len"
+        },
+        "Tip":  [
+            "<b>Tip:</b> ",
+            "All characters in the range have to be valid ( > 0x7 )."
+        ]
+
+    }
+}

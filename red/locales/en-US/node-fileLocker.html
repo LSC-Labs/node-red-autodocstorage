@@ -1,0 +1,84 @@
+
+<script type="text/html" data-help-name="lock file">
+    <p>Lock/Unlock a document for processing</p>
+    The lock comes in place, to avoid multiple triggers on the same document.
+    If an PDF file will be OCR parsed and enriched (later in the queue), it will be replaced. This would cause an unexpected trigger.
+    To avoid this behaviour, the processing will stop, if a valid lock (lockfile) is in place.
+    The lock file wil be stored at the same location as the file, with the extension ".lock".<br/>
+    <h3>Details</h3>
+    The node can lock, increment the lock or unlock a file.
+    <ol>
+        <li>Lock the file<br/>
+            <ul>
+                <li>If there is already a valid lockfile in place - the processing stops.</li>
+                <li>If no lock is in place, the module tries to set the lock - the message will be sent on port 1.</li>
+            </ul>
+        </li>
+        <li>Lock the file (increment)<br/>
+            Sets (if no lock is in place) or increment the lock counter (if there is already a lock in place).
+            In any case, the message will be sent on port 2.<br/>
+            If you want to ensure multiple triggers form the same file, use "set the lock" instead.
+        </li>
+        <li>Unlock the file<br/>
+            If there is a valid lockfile in place, the lock counter will be decremented.
+            <ul>
+                <li>If the lock counter becomes 0, the lockfile will be removed and the message will be send on port 2.</li>
+                <li>If the lock counter is not 0, no message will be send, the processing stops.</li>
+            </ul>
+
+        </li>
+        <li>Unlock the file (forced)<br/>
+            Same as "Unlock the file", but not caring about the counter. The lock will be removed immediatly.
+        </li>
+
+    </ol>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>The path to the document in a way, that it can be addressed and found.</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li >file locked<br/>
+            The file was locked. Either by setting the lock the first time,
+            and the lock comes in place, or by successfully incrementing the lock.
+        </li>
+        <li >file unlocked<br/>
+            The file was unlocked, the lockfile was removed.
+        </li>
+        <li >no lock possible<br/>
+            A lock could not set/removed... Reasons:
+            <dl>
+                <dt>Setting or incrementing the lock</dt>
+                <dd>
+                    <ol>
+                        <li>If you try to set the lock, but there is already a lock file in place.</li>
+                        <li>If you try to set the lock, but there was an I/O error.</li>
+                        <li>On incrementing the lock, the reason would be an I/O error.</li>
+                        <li>On removing the lock, but there is no lockfile in place - or there was an I/O error.</li>
+                    </ol>
+                </dd>
+                <dt>Removing the lock</dt>
+                <dd>
+                    <ol>
+                        <li>If you try to remove the lock, but there is no lockfile in place - or there was an I/O error.</li>
+                    </ol>
+                </dd>
+            </dl>
+            If an I/O error comes in place, please check the access rights of the node red user.
+        </li>
+        <li>not in scope<br/>
+            The input file is not in scope of this node. Either the event type or the defined file extensions does not match.<br/>
+            In this case, no action will be taken by this node.
+        </li>
+    </ol>
+    In all cases, the sent Message will be forwarded and contains:
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>The input file name.</dd>
+    </dl>
+
+
+</script>

@@ -1,0 +1,43 @@
+<script type="text/html" data-template-name="auto props">
+    <!-- Name of this node-->
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="autoProperties.Name.label"></label>
+        <input type="text" id="node-input-name" data-i18n="[placeholder]autoProperties.Name.label">
+    </div>
+     <div class="form-tips" id="node-tip-autoProps">
+        <span data-i18n="[html]autoProperties.Tip"></span>
+    </div>
+
+</script>
+
+<script type="text/javascript">
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('auto props',{
+        category: 'Auto Doc',
+        color: '#a6bbcf',
+        icon: "font-awesome/fa-angle-double-right",
+        label: function() { return this.name || "auto properties"; },
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            // to be implemented
+            setFileInfos: { value: true },
+
+            // to be implemented
+            autoDetectLanguage: { value: true },
+        },
+
+        inputs: 1,
+        inputLabels: [ "document file with text" ],
+
+        outputs: 1,
+        outputLabels: [ "enriched msg" ],
+
+});
+
+
+</script>
+

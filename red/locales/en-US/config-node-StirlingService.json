@@ -1,0 +1,21 @@
+{
+    "StirlingService": {
+        "Name" : {
+            "label": "Node Name"
+        },
+        
+        "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
+
+        "Address" : {
+            "label": "Address"
+        },
+
+        "Tip":  [
+                    "<b>Tip:</b>Web address of the Stirling service, optional with port number.<br/>",
+                    "<code>http(s)://servername(.dom):[port]</code>"
+                ]
+    }
+}

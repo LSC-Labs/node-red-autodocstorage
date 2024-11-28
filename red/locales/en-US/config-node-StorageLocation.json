@@ -1,0 +1,7 @@
+{
+    "StirlingService": {
+        "Tip": [
+                "<b>Tip:</b>Properties wil be substituted before msg properties."
+               ]
+    }
+}

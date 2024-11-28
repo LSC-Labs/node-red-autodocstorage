@@ -1,0 +1,113 @@
+<script type="text/html" data-template-name="set props">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="setProperties.Name.label"></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+
+    <!-- Property Container -->
+    <div class="form-row node-input-property-container-row">
+        <ol id="node-input-property-container"></ol>
+    </div>
+</script>
+
+
+<script type="text/javascript">
+
+    function exportProperty(oPropertyNode) {
+        var oProp = {};
+        oProp.name  = oPropertyNode.find(".node-input-property-name").val();
+        oProp.value = oPropertyNode.find(".node-input-property-value").val();
+        return oProp;
+    }
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('set props',{
+        category: 'Auto Doc',
+        color: '#a6bbcf',
+        icon: "font-awesome/fa-angle-double-right",
+        label: function() { return this.name || "set properties"; },
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            textProperties: { value : [ { name: "", value: "" } ] },
+
+        },
+
+        inputs: 1,
+        inputLabels: [ "document file with text" ],
+
+        outputs: 1,
+
+
+        oneditprepare: function() {
+            $("#node-input-property-container").css('min-height','150px').editableList({
+                /***
+                 * listItemRow - row to be edited
+                 * nIndex - current indext
+                 * oData - data object { name= xxx, value, yyyy }
+                 * */
+                addItem: (listItemRow, nIndex, oProp) => {
+                    listItemRow.css({
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        display: "flex",
+                        "align-items":"center"
+                    });
+                    // Basic HTML structure...
+                    var oInputRows = $('<div></div>',{style:"flex-grow:1"}).appendTo(listItemRow);
+                    var oMainRow = $('<div></div>',{style:"display: flex; width: 100%"}).appendTo(oInputRows);
+
+                    var oPropertyField = $('<input/>', {  class:"node-input-property-name",  type:"string",  placeholder:"property name",      style:"width:35%; margin-right:5px;"}).appendTo(oMainRow);
+                    var oValueField    = $('<input/>', {  class:"node-input-property-value", type:"string",  placeholder:"value",              style:"width:55%;"}).appendTo(oMainRow);
+
+                    oPropertyField.val(oProp.name);
+                    oValueField.val(oProp.value);
+                 },
+
+                // Editors Header...
+                header: $("<div>").append($.parseHTML("<div style='width:40%; display: inline-grid'>Property</div><div style='display: inline-grid'>Value</div>")),
+
+                removable: true
+
+            });
+            if(this.textProperties) {
+                // Initial load...
+                for (const oProperty of this.textProperties) {
+                    $("#node-input-property-container").editableList('addItem',oProperty);
+                }
+            }
+            // #endregion
+        },
+
+        oneditsave: function() {
+            // get gui elements with user payload
+            var tElementItems = $("#node-input-property-container").editableList('items');
+            var oNode = this;
+            oNode.textProperties = [];
+            tElementItems.each(function(i) {
+                let oProp = exportProperty($(this));
+                oNode.textProperties.push(oProp);
+            });
+        },
+        
+        oneditresize: function(size) {
+            var height = size.height;
+            var rows = $("#dialog-form>div:not(.node-input-property-container-row)");
+            for (const element of rows) {
+                height -= $(element).outerHeight(true);
+            };
+            var editorRow = $("#dialog-form>div.node-input-property-container-row");
+            height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
+            height += 32;
+            $("#node-input-property-container").editableList('height',height);
+
+        }
+        
+    });
+
+
+</script>
+

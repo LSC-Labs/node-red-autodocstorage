@@ -1,0 +1,115 @@
+<script type="text/html" data-template-name="lock file">
+
+    <!-- #region Options to Enable / Disable the lock -->
+    <div class="form-row" id="node-block-container-SelectMode">
+        <label for="node-input-lockMode"><i class="fa fa-unlock-alt"></i> <span data-i18n="fileLocker.LockMode.label"></span></label>
+        <select id="node-input-lockMode" style="width:70%">
+            <optgroup data-i18n="[label]fileLocker.LockMode.selectOptions">
+                <option value="setLock" data-i18n="fileLocker.LockMode.option.setLock" ></option>
+                <option value="incrementLock" data-i18n="fileLocker.LockMode.option.incrementLock" ></option>
+                <option value="removeLock" data-i18n="fileLocker.LockMode.option.removeLock" ></option>
+                <option value="removeLockForce" data-i18n="fileLocker.LockMode.option.removeLockForce" ></option>
+            </optgroup>
+            
+        </select>
+    </div>
+    <!-- #endregion -->
+
+    <!-- #region File lock Modes -->
+    <div id="node-block-container-FilterMasks" class="lockMode">
+        <div class="form-row" id="node-block-FilterMasks">
+            <label for="node-input-FilterMasks"><i class="fa fa-filter"></i> <span data-i18n="fileLocker.FilterMasks.label"></span></label>
+            <input  id="node-input-FilterMasks" type="text"  placeholder="File extensions, i.E. '*' or 'pdf;txt'" value="pdf">
+        </div>
+    </div>
+
+    <div class="form-row" id="node-block-ChangeEvents">
+        <label for="node-input-changeEvent"><i class="fa fa-filter"></i> <span data-i18n="fileLocker.ChangeEvents.label"></span></label>
+        <select id="node-input-changeEvent" style="width:70%">
+            <optgroup data-i18n="[label]fileLocker.ChangeEvents.selectOptions">
+                <option value="all" data-i18n="fileLocker.ChangeEvents.option.allChangeEvents" ></option>
+                <option value="update" data-i18n="fileLocker.ChangeEvents.option.updateChangeEvent" ></option>
+                <option value="remove" data-i18n="fileLocker.ChangeEvents.option.removeChangeEvent" ></option>
+            </optgroup>           
+        </select>
+    </div>
+
+    <div id="node-block-container-removeWhenUnlocked" class="unlockMode">
+        <div class="form-row" id="node-block-removeWhenUnlocked">
+            <label for="node-input-removeWhenUnlocked" style="width:20%;"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]fileLocker.RemoveWhenUnlocked.label"></span></label>
+            <input  id="node-input-removeWhenUnlocked" type="checkbox" style="margin-left:10px; vertical-align:top; width:auto;"/>
+            <label style="width:auto;"> <span data-i18n="[html]fileLocker.RemoveWhenUnlocked.text"></span></label>
+        </div>
+    </div>
+    <!-- #endregion -->
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="fileLocker.Name.label"></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+    
+    <div class="form-tips unlockMode">
+        <span data-i18n="[html]fileLocker.RemoveMode.Tip"></span>
+    </div>
+    <div class="form-tips lockMode">
+        <span data-i18n="[html]fileLocker.LockMode.Tip"></span>
+    </div>
+</script>
+
+
+<script type="text/javascript">
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('lock file',{
+        category: 'Auto Doc',
+        color: '#FDF0C2',
+        icon: "font-awesome/fa-lock",
+        label: function() { return this.name || "lock/unlock file"; },
+        paletteLabel: "lock filter",
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            // The possible Lock Modes
+            lockMode:     { value: "removeLock" },
+
+            changeEvent:  { value: "update" },
+
+            removeWhenUnlocked: { value: false },
+
+            // File Extensions without a '.' - normaly pdf
+            FilterMasks:      { value: "",   },
+
+        },
+
+        inputs: 1,
+        inputLabels: [ "file to be locked/unlocked" ],
+
+        outputs: 4,
+        outputLabels: [ "file locked", "file unlocked", "no lock possible", "not in scope" ],
+       
+
+        oneditprepare: function() {
+            let oSelectModeNode = $("#node-input-lockMode");
+            oSelectModeNode.change(function() {
+                var strLockMode = $("#node-input-lockMode").val();
+                this.lockMode = strLockMode;
+                // keep show() elements always at last element - so they can be shown in any case.
+                switch(strLockMode) {
+                    case "setLock": 
+                    case "incrementLock":
+                            $(".unlockMode").hide();
+                            $(".lockMode").show();
+                            break;
+                    default:
+                            $(".lockMode").hide();
+                            $(".unlockMode").show();
+                            break;
+                }
+            });
+        },
+    });
+
+
+</script>
+

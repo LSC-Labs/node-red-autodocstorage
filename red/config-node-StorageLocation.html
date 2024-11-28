@@ -1,0 +1,120 @@
+<script type="text/javascript">
+
+    function exportProperty(oPropertyNode) {
+        return {
+            name: oPropertyNode.find(".node-input-property-name").val(),
+            value: oPropertyNode.find(".node-input-property-value").val()
+        };
+    }
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('storage-location',{
+        category: 'config',
+        defaults: {
+            // Name of this config node
+            Name:       { value: ""     },
+            Address:    {   value: "" ,
+                            required: true , 
+                            validate:RED.validators.regex(/^(\/)/)
+                        },
+            Properties: { value : [ { name: "", value: "" } ] }, 
+        },
+        credentials: {
+            Username:   { type: "text"      },
+            Password:   { type: "password"  },
+        },
+        label: function() {
+            return ( this.Name ? this.Name : "Storage");
+        },
+
+        oneditprepare: function() {
+            let oNode = this;
+
+            // #region Property container
+            $("#node-input-property-container").css('min-height','150px').editableList({
+                addItem: (listItemRow, nIndex, oData) => {
+                    listItemRow.css({
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        display: "flex",
+                        "align-items":"center"
+                    });
+                    // Basic HTML structure...
+                    var oInputRows = $('<div></div>',{style:"flex-grow:1"}).appendTo(listItemRow);
+                    var oMainRow = $('<div></div>',{style:"display: flex; width: 100%"}).appendTo(oInputRows);
+
+                    var oPropertyField = $('<input/>', {  class:"node-input-property-name",  type:"string",  placeholder:"property name",      style:"width:35%; margin-right:5px;"}).appendTo(oMainRow);
+                    var oValueField    = $('<input/>', {  class:"node-input-property-value", type:"string",  placeholder:"value",              style:"width:55%;"}).appendTo(oMainRow);
+
+                    oPropertyField.val(oData.name);
+                    oValueField.val(oData.value);
+                 },
+
+                // Editors Header...
+                header: $("<div>").append($.parseHTML("<div style='width:40%; display: inline-grid'>Property</div><div style='display: inline-grid'>Value</div>")),
+                removable: true,
+                sortable: true
+            });
+
+            // Initial load...
+            if(oNode.Properties) {
+                for(const oProp of oNode.Properties) {
+                    if(oProp.name && oProp.name.length > 0) {
+                        $("#node-input-property-container").editableList('addItem',oProp);
+                    }
+                }
+            }
+
+            // #endregion
+        },
+
+        oneditsave: function() {
+            // #region "Save the properties !"
+            var tPropertyItems = $("#node-input-property-container").editableList('items');
+            var oNode = this;
+            oNode.Properties = [];
+            tPropertyItems.each(function(i) {
+                let oProp = exportProperty($(this));
+                if(oProp.name && oProp.name.length > 0) {
+                    oNode.Properties.push(oProp);
+                }
+            });
+            // #endregion
+       },
+
+    });
+</script>
+
+<script type="text/html" data-template-name="storage-location">
+ 
+
+    <div class="form-row">
+        <label for="node-config-input-Address"><i class="fa fa-globe"></i> Address</label>
+        <input type="text" id="node-config-input-Address" placeholder="/data/...">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-Username"><i class="fa fa-tag"></i> Username</label>
+        <input type="text" id="node-config-input-Username" >
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-Password"><i class="fa fa-tag"></i> Password</label>
+        <input type="text" id="node-config-input-Password" >
+    </div>
+
+     <!-- Property Container -->
+     <div class="form-row node-input-property-container-row">
+        <ol id="node-input-property-container"></ol>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-Name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-Name" placeholder="Location">
+    </div>
+    <div class="form-tips Tips" id="node-tips" style="margin-top:10px">
+        <span data-i18n="[html]StirlingService.Tip"></span>
+    </div>
+
+</script>
+
+<script type="text/html" data-help-name="storage-location">
+    <p>Properties for this location</p>
+</script>

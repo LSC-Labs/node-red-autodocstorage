@@ -1,0 +1,68 @@
+<script type="text/html" data-template-name="ocr scan">
+
+    <div class="form-row">
+        <label for="node-input-StirlingService"><i class="fa fa-globe"></i> <span data-i18n="scanPDFText.Service.label"></span></label>
+        <input id="node-input-StirlingService" type="text"/>
+    </div>
+
+    <div class="form-row" id="node-block-Operation">
+        <label for="node-input-operation"><i class="fa fa-filter"></i> <span data-i18n="scanPDFText.Operation.label"></span></label>
+        <select id="node-input-operation" style="width:70%">
+            <optgroup data-i18n="[label]scanPDFText.Operation.selectOptions">
+                <option value="replace"     data-i18n="scanPDFText.Operation.option.replace" ></option>
+                <option value="createnew"   data-i18n="scanPDFText.Operation.option.createnew" ></option>
+                <option value="textonly"    data-i18n="scanPDFText.Operation.option.textonly" ></option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-minLength"><i class="fa fa-arrows-h"></i> <span data-i18n="scanPDFText.MinLen.label"></span></label>
+        <input type="text" id="node-input-minLength" placeholder="20">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="scanPDFText.Name.label"></span></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+    <div class="form-tips" id="node-Tip">
+        <span data-i18n="[html]scanPDFText.Tip"></span>
+    </div>
+</script>
+
+<script type="text/javascript">
+    /* Register the set fix data node function */
+    RED.nodes.registerType('ocr scan',{
+        category: 'Auto Doc',
+        color: '#FFAAAA',
+        icon: "font-awesome/fa-globe",
+        label: function() { return this.name || "ocr scan pdf"; },
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            outputFormat: { value: "txt" },
+
+            operation: { value: "textonly" },
+
+            // Need the stirling service
+            StirlingService:  {
+                    type:"stirling-service", 
+                    required: true, 
+                },
+            // minlength of text to be accepted as valid
+            minLength: { value: 20, validate:RED.validators.number() }
+
+        },
+
+        inputs: 1,
+        inputLabels: [ "document file" ],
+
+        outputs: 3,
+        outputLabels: [ "doc with text", "new document", "no valid text" ],
+    
+});
+</script>
+
+

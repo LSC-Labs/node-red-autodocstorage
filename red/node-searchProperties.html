@@ -1,0 +1,286 @@
+<script type="text/html" data-template-name="search props">
+
+ 
+    <!-- Select options Area -->
+    
+    <!-- Operation Container -->
+    <div class="form-row" id="node-searchprops-container-Operation">
+
+        <label for="node-input-source"><i class="fa fa-ellipsis-h"></i> <span data-i18n="searchProperties.Operation.label"></span></label>
+
+        <select id="node-input-source" style="width:35%">
+            <optgroup data-i18n="[label]searchProperties.SelectSource.selectOptions">
+                <option value="DocumentText"    data-i18n="searchProperties.SelectSource.option.useDocumentText" ></option>
+                <option value="LastMatch"       data-i18n="searchProperties.SelectSource.option.useLastMatchResult" ></option>
+                <option value="FileName"        data-i18n="searchProperties.SelectSource.option.useFileName" ></option>
+                <option value="Property"        data-i18n="searchProperties.SelectSource.option.useTextProperty" ></option>
+                <option value="MessageProperty" data-i18n="searchProperties.SelectSource.option.useMessageProperty" ></option>
+            </optgroup>           
+        </select>
+
+        <select id="node-input-searchMode" style="width:35%" class="OperMode-useSearchStrings">
+            <optgroup data-i18n="[label]searchProperties.SearchMode.selectOptions">
+                <option value="FirstMatch" data-i18n="searchProperties.SearchMode.option.firstMatch" ></option>
+                <option value="AtLeastOne" data-i18n="searchProperties.SearchMode.option.atLeastOne" ></option>
+                <option value="AllMatches" data-i18n="searchProperties.SearchMode.option.allMatches" ></option>
+                <option value="NoMatch"    data-i18n="searchProperties.SearchMode.option.noMatch" ></option>
+                <option value="AnyCase"    data-i18n="searchProperties.SearchMode.option.anyCase" ></option>
+            </optgroup>           
+        </select>
+    </div>    
+    <div class="form-row usePropertyName">
+        <label for="node-input-usePropertyName" ><i class="fa fa-flag"></i> <span data-i18n="searchProperties.UseProperty.label"></label>
+        <input type="text" id="node-input-usePropertyName"/>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-caseSensitive" ><i class="fa fa-flag"></i> <span data-i18n="searchProperties.CaseSensitive.label"></label>
+        <input type="checkbox" id="node-input-caseSensitive" style="vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="searchProperties.CaseSensitive.text"></span></label>
+    </div>
+    <div class="form-row searchModeMulti">
+        <label for="node-input-firstGroupName" ><i class="fa fa-flag"></i> <span data-i18n="searchProperties.FirstGroupName.label"></label>
+        <input type="checkbox" id="node-input-firstGroupName" style="vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="searchProperties.FirstGroupName.text"></span></label>
+    </div>
+    <!-- Search Container -->
+    <div class="form-row node-input-search-container-row" >
+        <ol id="node-input-search-container"></ol>
+    </div>
+  
+
+    <!-- Property Container -->
+    <div class="form-row">
+        <ol id="node-input-property-container"></ol>
+        
+    </div>
+    <!-- https://www.himpler.com/blog/editable-lists-in-node-red/ -->
+
+    <div class="form-row">
+        <label for="node-input-TraceMode" ><i class="fa fa-bolt"></i> <span data-i18n="searchProperties.TraceMode.label"></label>
+        <input type="checkbox" id="node-input-TraceMode" style="vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="searchProperties.TraceMode.text"></span></label>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="searchProperties.Name.label"></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+
+    <div class="form-tips" id="node-tips">
+        <span data-i18n="[html]searchProperties.Tip"></span>
+    </div>
+</script>
+
+
+<script type="text/javascript">
+
+    function exportSearchMask(oMaskNode) {
+        return {
+            searchMask: oMaskNode.find(".node-input-search-mask").val()
+        }
+    }
+
+    function exportProperty(oPropertyNode) {
+        return {
+            name: oPropertyNode.find(".node-input-property-name").val(),
+            value: oPropertyNode.find(".node-input-property-value").val()
+        };
+    }
+
+    /* Register the node in the gui (with name) */
+    RED.nodes.registerType('search props',{
+        category: 'Auto Doc',
+        color: '#a6bbcf',
+        icon: "font-awesome/fa-angle-double-right",
+        label: function() { return this.name || "search properties in document"; },
+
+        defaults: {
+            // Name of this config node
+            name:           { value: "" },
+
+            searchMode:     { value: "FirstMatch" },
+
+            source:         { value: "DocumentText" },
+
+            usePropertyName: { value: "" },
+
+            searchMasks:    { value: [] },
+
+            caseSensitive:  { value: true },
+
+            firstGroupName: { value: false },
+
+            textProperties: { value : [ { name: "", value: "" } ] }, 
+
+            TraceMode:      { value: false },
+        },
+        inputs: 1,
+        inputLabels: [ "document file with text" ],
+
+        outputs: 2,
+        outputLabels: [ "match", "no match" ],
+
+        oneditprepare: function() {
+            let oNode = this;
+            let oSelectSearchNode = $("#node-input-selectSearchMode");
+            let oSelectSourceNode = $("#node-input-selectSource");
+
+            // #region Input Search Container
+            var strSearchMaskTitle = this._("searchProperties.SearchMaskHeader.label");
+            
+            $("#node-input-search-container").css('min-height','150px').editableList({
+                addItem: (listItemRow, nIndex, oData) => {
+                    listItemRow.css({
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        display: "flex",
+                        "align-items":"center"
+                    });
+                    // Basic HTML structure...
+                    var oInputRows = $('<div></div>',{style:"flex-grow:1"}).appendTo(listItemRow);
+                    var oMainRow = $('<div></div>',{style:"display: flex; width: 100%"}).appendTo(oInputRows);
+                    var oSearchField = $('<input/>', {  class:"node-input-search-mask", type:"string",  placeholder:"search for",   style:"width:100%; margin-right:5px;"}).appendTo(oMainRow);
+                    $(oSearchField).val(oData.searchMask);
+                    
+                },
+
+                // Editors Header...
+                header: $("<div>").append($.parseHTML("<div style='width:100%; display: inline-grid'>" + strSearchMaskTitle +"</div>")),
+                removable: true,
+                sortable: true,
+            });
+
+            // Initial load...
+            if(oNode.searchMasks) {
+                for (const oMask of oNode.searchMasks) {
+                    $("#node-input-search-container").editableList('addItem',oMask);
+                }
+            }
+
+            // #endregion
+
+            // #region Property container
+            $("#node-input-property-container").css('min-height','150px').editableList({
+                addItem: (listItemRow, nIndex, oData) => {
+                    listItemRow.css({
+                        overflow: 'hidden',
+                        whiteSpace: 'nowrap',
+                        display: "flex",
+                        "align-items":"center"
+                    });
+                    // Basic HTML structure...
+                    var oInputRows = $('<div></div>',{style:"flex-grow:1"}).appendTo(listItemRow);
+                    var oMainRow = $('<div></div>',{style:"display: flex; width: 100%"}).appendTo(oInputRows);
+
+                    var oPropertyField = $('<input/>', {  class:"node-input-property-name",  type:"string",  placeholder:"property name",      style:"width:35%; margin-right:5px;"}).appendTo(oMainRow);
+                    var oValueField    = $('<input/>', {  class:"node-input-property-value", type:"string",  placeholder:"value",              style:"width:55%;"}).appendTo(oMainRow);
+
+                    oPropertyField.val(oData.name);
+                    oValueField.val(oData.value);
+                 },
+
+                // Editors Header...
+                header: $("<div>").append($.parseHTML("<div style='width:40%; display: inline-grid'>Property</div><div style='display: inline-grid'>Value</div>")),
+
+                removable: true,
+                sortable: true
+            });
+
+            // Initial load...
+            if(oNode.textProperties) {
+                for(const oProp of oNode.textProperties) {
+                    if(oProp.name && oProp.name.length > 0) {
+                        $("#node-input-property-container").editableList('addItem',oProp);
+                    }
+                }
+            }
+
+            // #endregion
+
+            // #region Operation modies
+            $(oSelectSearchNode).val(this.operMode ? this.operMode : "FirstMatch" );
+            $(oSelectSourceNode).val(this.source ? this.source     : "DocumentText" );
+
+            // #endregion
+
+            // #region GUI behaviour 
+
+
+            // #endregion
+            let oSelectModeNode = $("#node-input-searchMode");
+            oSelectModeNode.change(function() {
+                let strLockMode = $("#node-input-searchMode").val();
+                // keep show() elements always at last element - so they can be shown in any case.
+                if(strLockMode == "FirstMatch") {
+                            $(".searchModeMulti").hide();
+                            $(".searchModeFirst").show();
+                            
+                } else {
+                            $(".searchModeFirst").hide();
+                            $(".searchModeMulti").show();
+                }
+            });
+
+            $("#node-input-source").change(function() {
+                let strSourceMode = $("#node-input-source").val();
+                // keep show() elements always at last element - so they can be shown in any case.
+                if(strSourceMode.includes("Property")) {
+                    $(".usePropertyName").show();
+                } else {
+                    $(".usePropertyName").hide();
+                }
+            });
+
+        },
+
+        oneditsave: function() {
+            var oNode = this;
+
+            // #region "Save the masks !"
+            var tSearchMasks = $("#node-input-search-container").editableList('items');
+            oNode.searchMasks = [];
+            tSearchMasks.each(function(i) {
+                let oSearchMask = exportSearchMask($(this));
+                if(oSearchMask && oSearchMask.searchMask && oSearchMask.searchMask.length > 0) {
+                    oNode.searchMasks.push(oSearchMask);
+                }
+            });
+
+            // #endregion
+
+            // #region "Save the properties !"
+            var tPropertyItems = $("#node-input-property-container").editableList('items');
+            
+            oNode.textProperties = [];
+            tPropertyItems.each(function(i) {
+                let oProp = exportProperty($(this));
+                if(oProp.name && oProp.name.length > 0) {
+                    oNode.textProperties.push(oProp);
+                }
+            });
+            // #endregion
+
+            // #region "Save the children of the world !!!"
+            oNode.searchMode  = $("#node-input-selectSearchMode").val();
+            oNode.source      = $("#node-input-selectSource").val();            
+            // #endregion
+
+
+       },
+        
+        oneditresize: function(size) {
+            var height = size.height;
+            var rows = $("#dialog-form>div:not(.node-input-search-container-row)");
+            for (const element of rows) {
+                height -= $(element).outerHeight(true);
+            }
+            var editorRow = $("#dialog-form>div.node-input-search-container-row");
+            height -= (parseInt(editorRow.css("marginTop"))+parseInt(editorRow.css("marginBottom")));
+            height += 16;
+            $("#node-input-search-container").editableList('height',height);
+        },
+    });
+
+
+</script>

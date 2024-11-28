@@ -1,0 +1,34 @@
+{
+    "scanPDFText": {
+        
+        "Name" : {
+            "label": "Node Name"
+        },
+
+        "Service": {
+            "label": "Stirling Svc"
+        },
+
+        "Operation": {
+            "label": "Operation",
+            "selectOptions": "operate mode",
+            "option": {
+                "replace":      "Replace source file and continue processing",
+                "createnew":    "Create new file with ocr - stop processing here.",
+                "textonly":     "Process found text (no change on source)"
+            }
+        },
+        
+        "MinLen": {
+            "label": "Min len"
+        },
+
+        "Tip":  [
+            "<b>Tip:</b> <dl>",
+            "<dt> <b>'Process found text'</b></dt><dd>, if you are not sure. This will leave the source file untouched.</dd>",
+            "<dt> <b>'Create new file with ocr'</b></dt><dd> - create a new file in parallel with additional '-ocr'. This will trigger a new process.</dd>",
+            "<dt> <b>'Replace source file...'</b></dt><dd> will replace the source file with the OCR enriched version.</dd>",
+            "</dl>"
+        ]   
+    }
+}

@@ -1,0 +1,44 @@
+{
+    "storeAsFile": {
+
+        "Name" : {
+            "label": "Node Name"
+        },
+
+        "StorageService": {
+            "label": "Location"
+        },
+
+        "Target": {
+            "label": "Target",
+            "selectOptions": "If target exists...",
+            "option": {
+                "noaction":        "don't copy",
+                "rename":          "rename",
+                "override":        "override"
+            }
+        },
+
+        "WriteLog": {
+            "label": "Log",
+            "text" : "write diag log (Target Location)."
+        },
+
+        "WriteCopyLog": {
+            "label": "Store info",
+            "text" : "update '_storage.log' in drop location."
+        },
+
+        "FilePath": {
+            "label": "Path mask"
+        },
+
+        "FileMask": {
+            "label": "File mask"
+        },
+       
+        "Tip":  [ 
+                    "Specify path and file by using properties $(xx)"
+                ]
+    }
+}

@@ -1,0 +1,598 @@
+[
+    {
+        "id": "9dca25ac43e4c99a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bb5e82cee512f07b",
+        "type": "group",
+        "z": "9dca25ac43e4c99a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "ceed8f558e4a6f63",
+            "d29face7243ca16f",
+            "726744952efc10ec",
+            "8c74641c531257c6",
+            "f7b6afe04e403121",
+            "b617254460b24727",
+            "26a77bd4278172ae",
+            "545d3e7875a5dc47"
+        ],
+        "x": 74,
+        "y": 599,
+        "w": 992,
+        "h": 222
+    },
+    {
+        "id": "8bf1d6f734454018",
+        "type": "group",
+        "z": "9dca25ac43e4c99a",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "652e3eb5ded39f05",
+            "6d6c4dbbb3366a1a",
+            "3c8b0f40d70d0d81",
+            "40be3ea2eb7775f8",
+            "ecaca89ac31dc3ba",
+            "d6a5ab43a0cb83d1",
+            "4f7afb98aa75847e",
+            "3466f3810a8b2d92",
+            "8cd516c1dda51276",
+            "04a0fb3aa9bef173",
+            "82fb5abcbff2bc4a",
+            "7efb8dfbf401497a",
+            "ab5985b264edf4fe",
+            "76e3ae3361565af6",
+            "76e28abab532e8b6",
+            "ad3a5cf61d8aeddc",
+            "b15a44a9a76fa244"
+        ],
+        "x": 74,
+        "y": 39,
+        "w": 992,
+        "h": 509.5
+    },
+    {
+        "id": "652e3eb5ded39f05",
+        "type": "inject",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "c:\\temp\\AutoDoc-Test.pdf",
+        "payloadType": "str",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "82fb5abcbff2bc4a"
+            ]
+        ]
+    },
+    {
+        "id": "6d6c4dbbb3366a1a",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Get Text From PDF",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3c8b0f40d70d0d81",
+        "type": "read pdf text",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "StirlingService": "cd91ddab7c2cb318",
+        "minLength": "20",
+        "x": 520,
+        "y": 200,
+        "wires": [
+            [
+                "6d6c4dbbb3366a1a",
+                "4f7afb98aa75847e"
+            ],
+            [
+                "40be3ea2eb7775f8"
+            ]
+        ],
+        "info": "Extracts the text from the PDF file,\r\nso it can be parsed.\r\n"
+    },
+    {
+        "id": "40be3ea2eb7775f8",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Error Get Text",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ecaca89ac31dc3ba",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Auto Properties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ceed8f558e4a6f63",
+        "type": "lock file",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "UnLocker",
+        "lockMode": "removeLock",
+        "FilterMasks": "pdf",
+        "x": 440,
+        "y": 740,
+        "wires": [
+            [
+                "8c74641c531257c6"
+            ],
+            [
+                "26a77bd4278172ae"
+            ],
+            [
+                "726744952efc10ec"
+            ]
+        ]
+    },
+    {
+        "id": "d29face7243ca16f",
+        "type": "inject",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "c:\\temp\\AutoDoc-Test.pdf",
+        "payloadType": "str",
+        "x": 170,
+        "y": 740,
+        "wires": [
+            [
+                "ceed8f558e4a6f63"
+            ]
+        ]
+    },
+    {
+        "id": "726744952efc10ec",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "DBG Lock Error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "8c74641c531257c6",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "DBG Locked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "f7b6afe04e403121",
+        "type": "lock file",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "Lock (inc)",
+        "lockMode": "incrementLock",
+        "FilterMasks": "  pdf ; text;",
+        "x": 440,
+        "y": 680,
+        "wires": [
+            [
+                "8c74641c531257c6"
+            ],
+            [
+                "26a77bd4278172ae"
+            ],
+            [
+                "726744952efc10ec"
+            ]
+        ]
+    },
+    {
+        "id": "b617254460b24727",
+        "type": "inject",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "c:\\temp\\AutoDoc-Test.pdf",
+        "payloadType": "str",
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "f7b6afe04e403121"
+            ]
+        ]
+    },
+    {
+        "id": "d6a5ab43a0cb83d1",
+        "type": "set props",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "textProperties": [
+            {
+                "name": "source",
+                "value": "Trigger"
+            }
+        ],
+        "x": 520,
+        "y": 140,
+        "wires": [
+            [
+                "3466f3810a8b2d92",
+                "3c8b0f40d70d0d81"
+            ]
+        ],
+        "info": "Setting some Properties into the flow, so it can be used, \r\nby the following modules to process.\r\n\r\nA good idea is to put the Source name into if\r\nit comes from a special user - in this case,\r\nthis user to be stored is identified"
+    },
+    {
+        "id": "4f7afb98aa75847e",
+        "type": "auto props",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "x": 520,
+        "y": 260,
+        "wires": [
+            [
+                "ecaca89ac31dc3ba",
+                "8cd516c1dda51276"
+            ]
+        ]
+    },
+    {
+        "id": "3466f3810a8b2d92",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Set Properties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8cd516c1dda51276",
+        "type": "search props",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "searchMode": "FirstMatch",
+        "source": "DocumentText",
+        "searchMasks": [
+            {
+                "searchMask": "Peter Liebl"
+            },
+            {
+                "searchMask": "Liebl Peter"
+            },
+            {
+                "searchMask": "peter liebl"
+            },
+            {
+                "searchMask": "liebl peter"
+            }
+        ],
+        "textProperties": [
+            {
+                "name": "doc.username",
+                "value": "Peter Liebl"
+            },
+            {
+                "name": "store.username",
+                "value": "Liebl, Peter"
+            }
+        ],
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "04a0fb3aa9bef173",
+                "7efb8dfbf401497a"
+            ],
+            [
+                "7efb8dfbf401497a"
+            ]
+        ]
+    },
+    {
+        "id": "04a0fb3aa9bef173",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Search Properties",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "82fb5abcbff2bc4a",
+        "type": "lock file",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "Lock file",
+        "lockMode": "setLock",
+        "FilterMasks": "*",
+        "x": 320,
+        "y": 120,
+        "wires": [
+            [
+                "d6a5ab43a0cb83d1",
+                "b15a44a9a76fa244"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "26a77bd4278172ae",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "DBG Unlocked",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "7efb8dfbf401497a",
+        "type": "store file",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "",
+        "fileMask": "$(doc.date)-$(file.name)-parsed.pdf",
+        "filePath": "c:\\temp\\AutoDocStore\\$(store.username)",
+        "targetOption": "rename",
+        "x": 540,
+        "y": 420,
+        "wires": [
+            [
+                "ab5985b264edf4fe",
+                "76e3ae3361565af6"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ab5985b264edf4fe",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Store File",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "76e3ae3361565af6",
+        "type": "lock file",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "Unlock File",
+        "lockMode": "removeLock",
+        "FilterMasks": "",
+        "x": 730,
+        "y": 500,
+        "wires": [
+            [
+                "76e28abab532e8b6"
+            ],
+            [
+                "76e28abab532e8b6"
+            ],
+            [
+                "76e28abab532e8b6"
+            ]
+        ]
+    },
+    {
+        "id": "76e28abab532e8b6",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Unlock File",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "545d3e7875a5dc47",
+        "type": "comment",
+        "z": "9dca25ac43e4c99a",
+        "g": "bb5e82cee512f07b",
+        "name": "Unlock Test with c:\\temp\\AutoDoc-Test.pdf",
+        "info": "# Unlock Text\n 1. First tests to set the lock. By each call, the lock will be incremented\n 2. Unlock - (decrement until the file is unlocked)\n\n",
+        "x": 260,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "ad3a5cf61d8aeddc",
+        "type": "comment",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "Process Test with c:\\temp\\AutoDoc-Test.pdf",
+        "info": "# Process Test\nFollowing steps will be tested:\n\n## \"Lock file\"\n - No lock is in place, - the processing should contiue\n - If a lock is in place, processing should stop.\n\n## \"Set properties\" \n - This will set some properties in the queue.\n - No parsing is in place, the props will be set as defined.\n\n## \"Get text from pdf\"\n - Uses the stirling service to parse the text inside the pdf.\n If no text is inside, the processing stops.\n\n## \"Auto properties\"\n- document properties will be set, like \"file.ext\".\n- autodetection of the language.\n- autodetection of the date inside the document.\n\n ## \"Search properties\"\n - This step searches in the text of the document and if it finds some\n usable data, the properties will be set.\n\n## \"Store file\" \n- will store the file by building the name with the found properties.\n\n## \"Unlock file\"\n- remove the lock.\n",
+        "x": 260,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b15a44a9a76fa244",
+        "type": "debug",
+        "z": "9dca25ac43e4c99a",
+        "g": "8bf1d6f734454018",
+        "name": "DBG Lock File",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cd91ddab7c2cb318",
+        "type": "stirling-service",
+        "Address": "http://svcpoint:9080",
+        "Trace": true,
+        "Name": "Service Point"
+    }
+]

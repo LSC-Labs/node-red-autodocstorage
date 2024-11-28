@@ -1,0 +1,58 @@
+<script type="text/html" data-template-name="read pdf text">
+
+    <div class="form-row">
+        <label for="node-input-StirlingService"><i class="fa fa-globe"></i> <span data-i18n="readPDFText.Service.label"></label>
+        <input id="node-input-StirlingService" type="text"/>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-minLength"><i class="fa fa-arrows-h"></i> <span data-i18n="readPDFText.MinLen.label"></label>
+        <input type="text" id="node-input-minLength" placeholder="20">
+    </div>
+
+    <div class="form-tips" id="node-tip">
+        <span data-i18n="[html]readPDFText.Tip"></span>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="readPDFText.Name.label"></label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+
+</script>
+
+<script type="text/javascript">
+    /* Register the set fix data node function */
+    RED.nodes.registerType('read pdf text',{
+        category: 'Auto Doc',
+        color: '#FFAAAA',
+        icon: "font-awesome/fa-globe",
+        label: function() { return this.name || "read text from pdf"; },
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            outputFormat: { value: "txt" },
+            
+            // Need the stirling service
+            StirlingService:  {
+                    type:"stirling-service", 
+                    required: true, 
+                },
+
+            // minlength of text to be accepted as valid.
+            // All chars must be valid ( > 0x7 )
+            minLength: { value: 20, validate:RED.validators.number() }
+
+        },
+
+        inputs: 1,
+        inputLabels: [ "document file" ],
+
+        outputs: 2,
+        outputLabels: [ "doc with text", "no valid text" ],
+    
+});
+</script>
+

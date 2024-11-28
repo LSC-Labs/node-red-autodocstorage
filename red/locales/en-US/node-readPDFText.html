@@ -1,0 +1,40 @@
+
+<script type="text/html" data-help-name="read pdf text">
+    <p>Reads the embedded text from an PDF document.</p>
+    If the pdf contains text, this module extracts this text, so it can be parsed
+    by the "search props" module. If no text is in place, use the <code>ocr scan</code> node instead.
+    <p>
+        Needs: Sterling service available.
+    </p>
+    <h3>Options</h3>
+    <dl>
+        <dt>Stirling Svc</dt>
+        <dd>Configure the sterling service here.</dd>
+        <br/>
+
+        <dt>Min len</dt>
+        <dd>Minimum of text inside the document (Default is 20 characters)<br/>
+        If less than this number of characters is found, the document will be treated as "no text available"</dd>
+    </dl>
+
+    <h3>Input</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>The path to the document in a way, that it can be addressed and found.</dd>
+    </dl>
+    <h3>Message enrichment</h3>
+    <dl class="message-properties">
+        <dt>textContent<span class="property-type">string</span></dt>
+        <dd>The content of the document as text.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <li ><code>doc with text</code><br/>   
+            The text is available.
+        </li>
+        <li>
+            <code>no text found</code><br/>   
+            No, or not enough text found.
+        </li>
+    </ol>
+</script>

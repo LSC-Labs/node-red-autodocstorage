@@ -1,0 +1,9 @@
+{
+    "autoProperties": {
+        "Name" : {
+            "label": "Node Name"
+        },
+        
+        "Tip":  "<b>Tip:</b> The language an the date in the document can be detected."
+    }
+}

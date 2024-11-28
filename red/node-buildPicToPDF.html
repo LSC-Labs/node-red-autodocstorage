@@ -1,0 +1,107 @@
+<script type="text/javascript">
+
+    /* Register the set fix data node function */
+    RED.nodes.registerType('pic to pdf',{
+        category: 'Auto Doc',
+        color: '#FFAAAA',
+        icon: "font-awesome/fa-globe",
+        label: function() { return this.name || "build PDF (Pic)"; },
+
+        defaults: {
+            // Name of this config node
+            name:       { value: "" },
+
+            // Need the stirling service
+            StirlingService:  {
+                    type:"stirling-service", 
+                    required: true, 
+                },
+
+            // How to fit the pages
+            fitMode: { value: "fillPage" }, // fillPage, fitPage2Img, mAR
+
+            autoRotate: { value: false },
+
+            colorOption: { value: "color" }, // color, greyscale, bw
+
+            // minlength of text to be accepted as valid
+            existOption: { value: "rename" },
+
+            TraceMode: { value: false }
+
+        },
+
+        inputs: 1,
+        inputLabels: [ "picture file" ],
+
+        outputs: 3,
+        outputLabels: [ "pdf created", "org message", "error" ],
+        
+});
+
+
+</script>
+
+<script type="text/html" data-template-name="pic to pdf">
+
+    <div class="form-row">
+        <label for="node-input-StirlingService"><i class="fa fa-globe"></i> Stirling Svc</label>
+        <input id="node-input-StirlingService" type="text"/>
+    </div>
+
+    
+    <!-- Fit Options -->
+    <div class="form-row">
+        <label for="node-input-fitMode"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]buildPicToPDF.fitMode.label"></span></label>
+        <select id="node-input-fitMode" style="width:70%">
+            <optgroup data-i18n="[label]buildPicToPDF.fitMode.title">
+                <option value="fillPage"            data-i18n="buildPicToPDF.fitMode.fillPage" ></option>
+                <option value="fitPageToImg"        data-i18n="buildPicToPDF.fitMode.fitPageToImage" ></option>
+                <option value="maintainAspectRatio" data-i18n="buildPicToPDF.fitMode.maintainAspectRatio" ></option>
+            </optgroup>
+        </select>
+    </div>
+
+    <!-- Color Options -->
+    <div class="form-row">
+        <label for="node-input-colorOption"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]buildPicToPDF.colorOption.label"></span></label>
+        <select id="node-input-colorOption" style="width:70%">
+            <optgroup data-i18n="[label]buildPicToPDF.colorOption.title">
+                <option value="color" data-i18n="buildPicToPDF.colorOption.color" ></option>
+                <option value="greyscale" data-i18n="buildPicToPDF.colorOption.greyscale" ></option>
+                <option value="blackwhite" data-i18n="buildPicToPDF.colorOption.blackwhite" ></option>
+            </optgroup>
+        </select>
+    </div>
+
+    <!-- Auto Rotate -->
+    <div class="form-row">
+        <label for="node-input-autoRotate" style="width:20%;"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]buildPicToPDF.autoRotate.label"></span></label>
+        <input  id="node-input-autoRotate" type="checkbox" style="margin-left:10px; vertical-align:top; width:auto;"/>
+        <label style="width:auto;"> <span data-i18n="[html]buildPicToPDF.autoRotate.text"></span></label>
+    </div>
+
+    <!-- Color Options -->
+    <div class="form-row">
+        <label for="node-input-existOption"><i class="fa fa-arrows-h"></i> <span data-i18n="[html]buildPicToPDF.existOption.label"></span></label>
+        <select id="node-input-existOption" style="width:70%">
+            <optgroup data-i18n="[label]buildPicToPDF.existOption.title">
+                <option value="override" data-i18n="buildPicToPDF.existOption.override" ></option>
+                <option value="rename" data-i18n="buildPicToPDF.existOption.rename" ></option>
+                <option value="noaction" data-i18n="buildPicToPDF.existOption.noaction" ></option>
+            </optgroup>
+        </select>
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-TraceMode" style="width:20%;"><i class="fa fa-bolt"></i> <span data-i18n="buildPicToPDF.TraceMode.label"></span></label>
+        <input type="checkbox" id="node-input-TraceMode" style="margin-left:10px; vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="buildPicToPDF.TraceMode.text"></span></label>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Node Name</label>
+        <input type="text" id="node-input-name" placeholder="Name of this node">
+    </div>
+
+</script>

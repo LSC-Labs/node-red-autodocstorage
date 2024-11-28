@@ -1,0 +1,40 @@
+
+<script type="text/html" data-help-name="auto props">
+    <p>Set well known document properties</p>
+    The modul sets some well known document properties the msg.payload is referencing.
+    <ol>
+        <li><code>file.Name</code>
+            The name of the file</li>
+        <li><code>file.Path</code>
+            The path to the file</li>
+        <li><code>file.Ext</code>
+            The extension of the file</li>
+        <li><code>doc.Language</code>
+            [optional] The language of the document.</li>
+        <li><code>doc.date</code>
+            The ISO formatted date found the document</li>
+        <li><code>doc.day</code>
+            The day part of $(doc.data)</li>
+        <li><code>doc.month</code>
+            The month part of $(doc.data)</li>
+        <li><code>doc.year</code>
+            The year part of $(doc.data)</li>
+    </ol>
+    <h3>Details</h3>
+    If the document contains a matching date, this module tries to detect
+    and will set date and language information, depending on the date format, in the document property list.
+    <br/>
+    The file information can be set in any case, the document information only, if the OCR text is already extracted.
+    <br/>
+    Tip: If you know, it is an other language, 
+    you can "switch" the properties with the "search prop" module (!)
+    <dl>
+        <dt>ENU</dt>
+        <dd>mm/dd/yyyy will result in language "ENU".</dd>
+        <dt>DEU</dt>
+        <dd>dd.mm.yyyy will result in language "DEU".</dd>
+        <dt>ISO</dt>
+        <dd>yyyy-mm-dd NO language will be set (!), but date information.</dd>
+    </dl>
+     
+</script>

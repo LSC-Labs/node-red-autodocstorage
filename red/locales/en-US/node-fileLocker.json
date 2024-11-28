@@ -1,0 +1,52 @@
+{
+    "fileLocker": {
+        "Name" : {
+            "label": "Node Name"
+        }, 
+        "LockMode": {
+            "label": "Lock mode",
+            "selectOptions": "File lock modes",
+            "option": {
+                "setLock":          "Lock the file for processing",
+                "incrementLock":    "Lock the file (Increment the counter)",
+                "removeLock":       "Unlock the file (Decrement/Remove lock)",
+                "removeLockForce":  "Unlock the file forced"
+            },
+            "Tip":  [
+                        "<b>Extensions</b>: ",
+                        "Expected is a list of file extensions that should be processed.",
+                        "The wildcard '*' for all extensions can be used.<br/>",
+                        "The check of the extensions is NOT case sensitive!",
+                        "Sample: 'pdf;txt;...'"
+                    ]
+        },
+        
+        "RemoveMode" : {
+            "Tip": 
+                [
+                    "<b>Option Remove</b>: ",
+                    "Use this flag carefully - cause it will delete the inputfile,",
+                    "even if no lock could be set or incremented!"
+                ]
+            },
+        
+        "FilterMasks": {
+            "label": "Extensions"
+        },
+
+        "ChangeEvents": {
+            "label": "Changes",
+            "selectOptions": "Changes",
+            "option": {
+                "allChangeEvents": "all file changes",
+                "updateChangeEvent": "new / updated files",
+                "removeChangeEvent": "removed / deleted files"
+            }
+        },
+
+        "RemoveWhenUnlocked": {
+            "label":    "Remove",
+            "text" :    "Remove input file when no lock is in place."
+        }
+    }
+}

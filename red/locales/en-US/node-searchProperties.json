@@ -1,0 +1,61 @@
+{
+    "searchProperties": {
+
+        "Name" : {
+            "label": "Node Name"
+        },
+
+        "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
+
+        "Operation": {
+            "label": "Operation"
+        },
+
+        "SelectSource": {
+            "selectOptions": "select Input",
+            "option": {
+                "useDocumentText":          "document text",
+                "useLastMatchResult":       "last match result",
+                "useFileName":              "source file name",
+                "useTextProperty":              "text property",
+                "useMessageProperty":       "message property"
+            }
+        },
+
+        "UseProperty" : {
+            "label": "Property"
+        },
+        "FirstGroupName" : {
+            "label": "First group",
+            "text" : "First group name wins"
+        },
+        "CaseSensitive" : {
+            "label": "Case search",
+            "text" : "Search masks are case sensitive"
+        },
+
+        "SearchMode": {
+            "selectOptions": "search Mode",
+            "option": {
+                "firstMatch":         "first match",
+                "allMatches":         "all matches",
+                "atLeastOne":         "at least one match",
+                "noMatch"   :         "if no match",
+                "anyCase"   :         "in any case (match or not)"
+            }
+        },
+        "SearchMaskHeader": {
+            "label": "Search mask(s) (regular expression)"
+        },
+
+        "Tip": [
+            "<b>Tips:</b> Use [\\S\\s]* instead of .* to search in multiple lines (skip the \\r\\n chars).",
+            "You can name a group by using (?&lt;groupname&gt;...) in a search mask,",
+            "and use $(1..n) or $(groupname) to address this group by number or name when setting the property.<br/>",
+            "The (overall) matching result of the search is available in group $(0)."
+            ]
+    }
+}
