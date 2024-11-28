@@ -1,6 +1,6 @@
 {
   "name": "@lsc-labs/node-red-contrib-autodocstorage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatic document storage system",
   "main": "lsc-autodocstorage.js",
   "scripts": {
@@ -26,6 +26,7 @@
   "author": "LSC-Labs",
   "license": "ISC",
   "node-red": {
+    "version": ">=4.0.2",
     "nodes": {
       "filelocker": "red/node-fileLocker.js",
       "autoproperties": "red/node-autoProperties.js",
