@@ -56,6 +56,7 @@ describe('CVarTable Class Tests', function () {
         assert.strictEqual(oVarTab2.substituteLine("$(var3)-$(Var2)"),              "$(var3)-value2",   "full var name if var does not exist");
         assert.strictEqual(oVarTab2.substituteLine("$(var3??)#$(Var2)"),            "#value2",          "blank if var does not exist (??)");
         assert.strictEqual(oVarTab2.substituteLine("$(var3??$(var2))#$(Var2)"),     "value2#value2",    "blank if var does not exist (??)");
+        assert.strictEqual(oVarTab2.substituteLine("$(var3?? - $(Var2))"),          " - value2",        "Use var2 if var3 does not exist (??)");
         assert.strictEqual(oVarTab2.substituteLine("$(var3?)#$(Var2)"),             "#value2",          "blank if var does not exist (??)");
         assert.strictEqual(oVarTab2.substituteLine("$(var3?exist:$(var2))#$(Var2)"),"value2#value2",    "if then else sustitution (non exist)");
         assert.strictEqual(oVarTab2.substituteLine("$(var2?exist:$(var1))#$(Var1)"),"exist#value1",     "if then else sustitution (exist)");
