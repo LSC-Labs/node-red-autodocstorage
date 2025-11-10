@@ -42,6 +42,18 @@ node|short|objective
 "build PDF"|build a PDF file|Builds a new PDF file from one or more picture (jpg, png). The PDF does NOT contain a valid text, so you should use "scan PDF" after creating. (Needs Stirling Service in place)
 ["store File"](storeFile.md)|store the file|Store the input file in a location by building the target path and name based on the properties found.
 
+## Properties
+When setting text properties, you can reflect already existing properties, using the syntax `$(propertyname)`
+
+If the property does not exist, the result will the string `$(propertyname)`. This is usefull, if you want to define the propertyname in a later step.
+
+### Conditional setting of a property
+Setting|Result
+:--|:--
+$(propertyname??)|The value will be empty, if the propertyname does not exist
+$(propertyname?value1:value2)|If propertyname exists, the result will be value1, otherwise value2. Instead of using a static text, you can also use a property by adressing with the same syntax $(otherproperty).
+
+
 ## Test cases
 In the folder "examples" you find a sample workflow with some test cases for the node, so you can get familiar with it. 
 
