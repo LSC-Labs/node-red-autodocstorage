@@ -1,16 +1,17 @@
 {
   "name": "@lsc-labs/node-red-contrib-autodocstorage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automatic document storage system",
   "main": "lsc-autodocstorage.js",
   "scripts": {
-    "build-ts": "tsc",
     "build": "npm run build-ts",
-
     "test": "npm run test-libs && npm run test-nodes",
+    "build-ts": "tsc",
     "test-file": "mocha ",
     "test-nodes": "mocha \"test/**/*_spec.js\"",
-    "test-libs":  "mocha \"src/test/**/*_spec.js\""
+    "test-libs": "mocha \"src/test/**/*_spec.js\"",
+    "publish-npm-package": "npm publish"
+
   },
   "keywords": [
     "node-red",
@@ -41,11 +42,12 @@
     }
   },
   "devDependencies": {
-    "node-red": "^4.0.2",
     "@types/node": "^20.12.7",
     "@types/node-red": "^1.3.5",
     "mocha": "^10.7.3",
-    "node-red-node-test-helper": "^0.3.4"
+    "node-red": "^4.0.2",
+    "node-red-node-test-helper": "^0.3.4",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "form-data": "^4.0.0",

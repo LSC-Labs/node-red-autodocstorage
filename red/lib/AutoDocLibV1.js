@@ -15,13 +15,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CFileLocker = exports.CTextParser = exports.CAutoParseDate = exports.CTargetFile = exports.TargetOption = exports.CNodeObjectContext = exports.CNodeRedMsg = exports.CAutoDocObject = exports.PROPERTY_LOG_MESSAGES = exports.PROPERTY_TEXTPROPERTY_LIST = exports.PROPERTY_LASTMATCH_CONTENT = exports.PROPERTY_TEXT_CONTENT = exports.OPTION_SEARCH_ANYCASE = exports.OPTION_SEARCH_NOMATCH = exports.OPTION_SEARCH_ATLEASTONE = exports.OPTION_SEARCH_FIRSTMATCH = exports.OPTION_SEARCH_ALLMATCHES = exports.TEXT_CONTENT_MSG_PROPERTY = exports.TEXT_CONTENT_PROPERTY = exports.TEXT_CONTENT_FILENAME = exports.TEXT_CONTENT_LASTMATCH = exports.TEXT_CONTENT_DOCUMENT = void 0;
 exports.writeToStorageLogOf = writeToStorageLogOf;
@@ -504,7 +514,12 @@ class CAutoParseDate {
             MonthNames: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
             FormatLongName: "$(day) $(MonthName) $(year)",
             ScanMasks: [
-                { Format: "Month", Masks: ["(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{2,4})"] },
+                // Try to find the long format first, to avoid this conflict.
+                // If not found, try the short format..
+                { Format: "Month", Masks: [
+                        "(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{4})",
+                        "(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{2})"
+                    ] },
                 { Format: "MonthNames", Masks: ["(?<Day>\\d{1,2})\\.{0,1} (?<MonthName>[A-Za-zä]{3,9}) (?<Year>\\d{2,4})",] }
             ],
         },

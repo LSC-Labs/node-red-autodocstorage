@@ -564,8 +564,13 @@ export class CAutoParseDate {
             Lang: "DEU",
             MonthNames: [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
             FormatLongName: "$(day) $(MonthName) $(year)",
-            ScanMasks: [
-                { Format: "Month",      Masks: ["(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{2,4})" ]},
+            ScanMasks: [    // As sometimes, the time is written with dots '.' instead of ':',
+                            // Try to find the long format first, to avoid this conflict.
+                            // If not found, try the short format..
+                { Format: "Month",      Masks: [
+                                                "(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{4})",
+                                                "(?<day>\\d{1,2})\\.(?<Month>\\d{1,2})\\.(?<Year>\\d{2})"
+                                                ]},
                 { Format: "MonthNames", Masks: [ "(?<Day>\\d{1,2})\\.{0,1} (?<MonthName>[A-Za-zä]{3,9}) (?<Year>\\d{2,4})", ]}
                 ],
         },

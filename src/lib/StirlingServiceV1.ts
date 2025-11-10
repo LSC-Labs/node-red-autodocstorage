@@ -126,7 +126,7 @@ export class CStirlingService {
                 for(let nIdx = 0; nIdx < strFileName.length; nIdx++) {
                     this.trace(" -> adding fileInput: " + strFileName[nIdx])
                     let oContent = FS.readFileSync(strFileName[nIdx]);
-                    oFormData.append("fileInput", new File([oContent],PATH.basename(strFileName[nIdx])));
+                    oFormData.append("fileInput", new File([oFileContent],PATH.basename(strFileName[nIdx])));
                 }
             }
         }
