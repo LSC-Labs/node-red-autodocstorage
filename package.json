@@ -1,6 +1,6 @@
 {
   "name": "@lsc-labs/node-red-contrib-autodocstorage",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Automatic document storage system",
   "main": "lsc-autodocstorage.js",
   "scripts": {
