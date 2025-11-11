@@ -38,6 +38,13 @@
         <label for="node-input-fileMask"><i class="fa fa-file-o"></i> <span data-i18n="storeAsFile.FileMask.label"></span></label>
         <input  id="node-input-fileMask" type="text"  placeholder="$(filename).pdf">
     </div>
+    <!-- Tracing on / off -->
+    <div class="form-row">
+        <label for="node-input-TraceMode" ><i class="fa fa-bolt"></i> <span data-i18n="storeAsFile.TraceMode.label"></label>
+        <input type="checkbox" id="node-input-TraceMode" style="vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="storeAsFile.TraceMode.text"></span></label>
+    </div>
+
     
     <!-- Name of this node-->
     <div class="form-row">
@@ -74,6 +81,7 @@
 
             writeCopyLog:   { value: false },
 
+            TraceMode:      { value: false },
 
             // Need the storage handler infos
             StorageLocation:  {

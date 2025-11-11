@@ -22,7 +22,10 @@
         "MinLen": {
             "label": "Min len"
         },
-
+        "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
         "Tip":  [
             "<b>Tip:</b> <dl>",
             "<dt> <b>'Process found text'</b></dt><dd>, if you are not sure. This will leave the source file untouched.</dd>",

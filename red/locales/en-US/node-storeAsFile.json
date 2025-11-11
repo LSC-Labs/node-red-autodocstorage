@@ -36,6 +36,10 @@
         "FileMask": {
             "label": "File mask"
         },
+        "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
        
         "Tip":  [ 
                     "Specify path and file by using properties $(xx)"

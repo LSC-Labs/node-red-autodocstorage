@@ -9,6 +9,10 @@
         "MinLen": {
             "label": "Min len"
         },
+         "TraceMode": {
+            "label": "Trace",
+            "text" : "Enable trace mode"
+        },
         "Tip":  [
             "<b>Tip:</b> ",
             "All characters in the range have to be valid ( > 0x7 )."

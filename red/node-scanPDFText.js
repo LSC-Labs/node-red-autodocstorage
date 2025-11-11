@@ -85,7 +85,7 @@ module.exports = function(RED) {
             let oFinalStatus = oReadyStatus;
             let oNodeContext = new AUTODOC.CNodeObjectContext(this,oConfig,oMsg,"scanPDFText");
             let oStirlingService = new STIRLING.CStirlingService(oStirlingServiceNode.Address,oStirlingServiceNode.TraceMode, oNodeContext); 
-            oContext.log("- (STIRLING) ocr scan of document " + oMsg.payload);
+            oNodeContext.log("- (STIRLING) ocr scan of document " + oMsg.payload);
             try {
                 if(FS.existsSync(oMsg.payload)) {
                     oNode.status(oActiveStatus);
@@ -117,16 +117,14 @@ module.exports = function(RED) {
                                 oNodeContext.error(" - oper mode not implemented : " + oConfig.operation);
                                 oFinalStatus = {text:"unknown mode : " + oConfig.operation,color:"red", shape:"dot"};
                                 break;
-                            }
-                            oNode.status(oFinalStatus);
-                        });
+                        }
+                    });
                 }
-                
-                
             } catch(ex) {
                 oNodeContext.error(ex);
-                oNodeFinalStatus = {fill:"red",shape:"dot",text:ex.message}
+                oFinalStatus = {fill:"red",shape:"dot",text:ex.message}
             }
+            oNode.status(oFinalStatus);
         });
     };
 

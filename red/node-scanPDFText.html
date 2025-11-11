@@ -20,6 +20,11 @@
         <label for="node-input-minLength"><i class="fa fa-arrows-h"></i> <span data-i18n="scanPDFText.MinLen.label"></span></label>
         <input type="text" id="node-input-minLength" placeholder="20">
     </div>
+    <div class="form-row">
+        <label for="node-input-TraceMode" ><i class="fa fa-bolt"></i> <span data-i18n="scanPDFText.TraceMode.label"></label>
+        <input type="checkbox" id="node-input-TraceMode" style="vertical-align:top; width:auto;">
+        <label style="width:auto;"> <span data-i18n="scanPDFText.TraceMode.text"></span></label>
+    </div>
 
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="scanPDFText.Name.label"></span></label>
@@ -46,13 +51,16 @@
 
             operation: { value: "textonly" },
 
+            
             // Need the stirling service
             StirlingService:  {
                     type:"stirling-service", 
                     required: true, 
                 },
             // minlength of text to be accepted as valid
-            minLength: { value: 20, validate:RED.validators.number() }
+            minLength: { value: 20, validate:RED.validators.number() },
+
+            TraceMode:      { value: false }
 
         },
 
