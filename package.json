@@ -26,6 +26,8 @@
   ],
   "author": "LSC-Labs",
   "license": "ISC",
+  "url": "https://github.com/LSC-Labs/node-red-autodocstorage/issues",
+  "email": "office@lsc-labs.de",
   "node-red": {
     "version": ">=4.0.2",
     "nodes": {
@@ -40,6 +42,9 @@
       "storagelocation": "red/config-node-StorageLocation.js",
       "storeasfile": "red/node-storeAsFile.js"
     }
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
